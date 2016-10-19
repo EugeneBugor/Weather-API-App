@@ -8,8 +8,7 @@
   },
   "author": "Yevhenii Buhor <eugene.bugor@gmail.com>",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "concurrently": "^3.1.0",
+    "body-parser": "^1.15.2",    
     "express": "^4.14.0",
     "less": "^2.7.1",
     "react": "^15.3.1",
