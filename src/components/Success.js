@@ -1,54 +1,52 @@
 import React from 'react';
 
-import './../styles/Success.less'
-
 export default class Success extends React.Component {
     static propTypes = {
-        responseObj: React.PropTypes.object
+        weather_obj: React.PropTypes.object
     };
 
     options = () => {
+        const {
+            weather_obj: {
+                name,
+                sys,
+                weather,
+                main,
+                coord
+            }
+        } = this.props;
+
         return {
-            'city': this.props.responseObj.list[0].name,
-            'country': this.props.responseObj.list[0].sys.country,
-            'icon': this.props.responseObj.list[0].weather[0].icon,
-            'mainWeather': this.props.responseObj.list[0].weather[0].main,
-            'detailsWeather': this.props.responseObj.list[0].weather[0].description,
-            'temp': this.props.responseObj.list[0].main.temp,
-            'coords': this.props.responseObj.list[0].coord
+            'city': name,
+            'country': sys && sys.country,
+            'icon': weather && weather[0].icon,
+            'details_weather': weather && weather[0].description,
+            'main_weather': weather && weather[0].main,
+            'temp': main && main.temp,
+
         }
+    };
+
+    getWeatherImage = options => {
+        return <img className="img-weather"
+                    src={`http://openweathermap.org/img/w/${options.icon}.png`}
+                    alt={options.main_weather}/>
     };
 
     render() {
         const options = this.options();
 
-        let img = <img className="img-weather"
-                       src={`http://openweathermap.org/img/w/${options.icon}.png`}
-                       alt={options.mainWeather}/>,
-            time = <p>{new Date().getHours() < 10 ? `0${new Date().getHours()}` : new Date().getHours()}
-                :<span>{new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : new Date().getMinutes()}</span>
-            </p>;
-
-
         return (
-            <table className="Success">
-
-                <tbody>
-                <tr>
-                    <th>{options.city}</th>
-                    <th>{time}</th>
-                </tr>
-                <tr>
-                    <td>{options.country}</td>
-                </tr>
-                <tr>
-                    <td>{img}{`${options.temp} °C`} </td>
-                </tr>
-                <tr>
-                    <td>{options.detailsWeather} </td>
-                </tr>
-                </tbody>
-            </table>
+            <div className="success">
+                <div className="header">
+                    <span className="city">{options.city}</span>
+                    <span className="country">{options.country}</span>
+                </div>
+                <div className="weather">
+                    <span className="weather-img">{this.getWeatherImage(options)}</span>
+                    <span className="weather-temp">{`${options.temp} °C`}</span>
+                </div>
+            </div>
         )
     }
 };

@@ -3,14 +3,10 @@
 import { Button, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import React from 'react';
 
-import './../styles/FormBox.less';
-
 export default class FormBox extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            city: ''
-        }
+    constructor(props) {
+        super(props);
+        this.state = { city: '' }
     }
 
     static propTypes = {
@@ -19,26 +15,17 @@ export default class FormBox extends React.Component {
 
     handleText = (e) => {
         const city = e.target.value;
-        this.setState({
-            city: city
-        });
+        this.setState({ city: city });
     };
 
     handleDataSubmit = (e) => {
         e.preventDefault();
 
-        let img = document.createElement('img');
-        img.src = '/pics/loading.gif';
-        img.classList.add('loading-img');
-
         const city = this.state.city.trim().toLowerCase();
-        if (!city) return;
-
-        document.getElementsByClassName('result-box')[0] ? document.getElementsByClassName('result-box')[0].style.display = 'none' : null;
-        document.getElementById('container').appendChild(img);
-
-        this.props.submit(city);
-        this.setState({city: ''});
+        if (city) {
+            this.props.submit(city);
+            this.setState({ city: '' });
+        }
     };
 
     render() {

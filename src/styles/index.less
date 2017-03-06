@@ -1,0 +1,49 @@
+body {
+  padding-top: 10px;
+}
+
+.weather-main {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 35%;
+  .success {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      .city {
+        font-size: 40px;
+      }
+      .country {
+        font-size: 15px;
+        margin-left: 10px;
+      }
+    }
+    .weather {
+      .weather-img {
+        > img {
+          width: 100px;
+        }
+      }
+      .weather-temp {
+        font-size: 80px;
+      }
+    }
+    .weather-details {
+
+    }
+  }
+}
+
+.loading-img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 45%;
+  top: 70px;
+}
